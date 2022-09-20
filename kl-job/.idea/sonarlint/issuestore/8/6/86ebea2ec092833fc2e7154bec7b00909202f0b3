@@ -1,0 +1,17 @@
+
+P
+java:S1118":Add a private constructor to hide the implicit public one.(¿’ðº
+`
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(¤Òèºÿÿÿÿÿ
+_
+java:S2147)"DCombine this catch with the one at line 39, which has the same body.(°êã§ýÿÿÿÿ
+Z
+java:S2147+"DCombine this catch with the one at line 39, which has the same body.(ï­£Ä
+_
+java:S2147>"DCombine this catch with the one at line 60, which has the same body.(°êã§ýÿÿÿÿ
+Z
+java:S2147@"DCombine this catch with the one at line 60, which has the same body.(ï­£Ä
+_
+java:S2147U"DCombine this catch with the one at line 83, which has the same body.(°êã§ýÿÿÿÿ
+Z
+java:S2147W"DCombine this catch with the one at line 83, which has the same body.(ï­£Ä
