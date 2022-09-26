@@ -62,6 +62,10 @@ public class XxlJobExecutor {
 
         JobLogFileCleanThread.getInstance().start(logRetentionDays);
 
+        initEmbedServer(address,ip,port,appname,accessToken);
+    }
+
+    private void initEmbedServer(String address, String ip, int port, String appname, String accessToken) {
 
     }
 

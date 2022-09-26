@@ -4,6 +4,7 @@ import com.kl.job.core.biz.model.HandleCallbackParam;
 import com.kl.job.core.executor.XxlJobExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,9 @@ public class TriggerCallbackThread {
                             getInstance().callBackQueue.drainTo(callbackParamList);
                             callbackParamList.add(handleCallbackParam);
 
+                            if (!CollectionUtils.isEmpty(callbackParamList)) {
+                                // TODO: 2022-09-20  
+                            }
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
