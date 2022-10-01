@@ -2,14 +2,24 @@ package com.kl.job.core.executor;
 
 import com.kl.job.core.biz.AdminBiz;
 import com.kl.job.core.biz.client.AdminBizClient;
+import com.kl.job.core.biz.handler.IJobHandler;
+import com.kl.job.core.biz.handler.annotation.XxlJob;
+import com.kl.job.core.biz.handler.impl.MethodJobHandler;
 import com.kl.job.core.log.XxlJobFileAppender;
+import com.kl.job.core.server.EmbedServer;
 import com.kl.job.core.thread.JobLogFileCleanThread;
+import com.kl.job.core.util.IpUtil;
+import com.kl.job.core.util.NetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
+import sun.awt.EmbeddedFrame;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class XxlJobExecutor {
     public static final Logger logger = LoggerFactory.getLogger(XxlJobExecutor.class);
@@ -62,11 +72,28 @@ public class XxlJobExecutor {
 
         JobLogFileCleanThread.getInstance().start(logRetentionDays);
 
+        // TODO: 2022-09-27
+
         initEmbedServer(address,ip,port,appname,accessToken);
     }
 
-    private void initEmbedServer(String address, String ip, int port, String appname, String accessToken) {
+    private EmbedServer embedServer = null;
 
+    private void initEmbedServer(String address, String ip, int port, String appname, String accessToken) {
+        port = port > 0?port : NetUtil.findAvailablePort(9999);
+        ip = (ip != null && ip.trim().length()>0)? ip : IpUtil.getIp();
+
+        if (address == null || address.trim().length() == 0) {
+            String ip_port_address = IpUtil.getIpPort(ip, port);
+            address = "htto://{ip_port}/".replace("{ip_port}", ip_port_address);
+        }
+
+        if (StringUtils.isEmpty(accessToken)) {
+            logger.warn("accesstoken is null");
+        }
+
+        embedServer = new EmbedServer();
+        embedServer.start(address,port,appname,accessToken);
     }
 
     private static List<AdminBiz> adminBizList;
@@ -87,4 +114,50 @@ public class XxlJobExecutor {
     public static List<AdminBiz> getAdminBizList() {
         return adminBizList;
     }
+
+    private static ConcurrentMap<String, IJobHandler> jobHandlerConcurrentMap = new ConcurrentHashMap<>();
+    public static IJobHandler loadJobHandler(String name) {
+        return jobHandlerConcurrentMap.get(name);
+    }
+    private IJobHandler newRegistJobHandler(String name, MethodJobHandler methodJobHandler) {
+        return jobHandlerConcurrentMap.get(name);
+    }
+
+    public void registJobHandler(XxlJob xxlJob, Object bean, Method executeMethod) {
+        if (xxlJob == null) {
+            return;
+        }
+        String name = xxlJob.value();
+        Class<?> clazz = bean.getClass();
+        String methodName = executeMethod.getName();
+        if (name.trim().length() == 0) {
+            throw new RuntimeException("xxl-job method");
+        }
+
+        if (loadJobHandler(name) != null) {
+            throw new RuntimeException("xxl-job jobhandler[" + name + "] naming conflicts.");
+        }
+        executeMethod.setAccessible(true);
+
+        Method initMethod = null;
+        Method destroyMethod = null;
+        if (xxlJob.init().trim().length() > 0) {
+            try {
+                initMethod = clazz.getDeclaredMethod(xxlJob.init());
+                initMethod.setAccessible(true);
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException("xxl-job method-jobhandler initMethod invalid, for[" + clazz + "#" + methodName + "] .");
+            }
+        }
+        if (xxlJob.destroy().trim().length() > 0) {
+            try {
+                clazz.getDeclaredMethod(xxlJob.destroy());
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException("xxl-job method-jobhandler destroyMethod invalid, for[" + clazz + "#" + methodName + "] .");
+            }
+        }
+        newRegistJobHandler(name, new MethodJobHandler(bean, executeMethod, initMethod, destroyMethod));
+    }
+
+
 }

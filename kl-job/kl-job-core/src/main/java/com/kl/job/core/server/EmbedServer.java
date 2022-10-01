@@ -1,26 +1,25 @@
 package com.kl.job.core.server;
 
 import com.kl.job.core.biz.ExecutorBiz;
-import com.kl.job.core.biz.client.ExecutorBizClient;
 import com.kl.job.core.biz.impl.ExecutorBizImpl;
+import com.kl.job.core.biz.model.*;
+import com.kl.job.core.thread.ExecutorRegistryThread;
 import com.kl.job.core.util.GsonTool;
+import com.kl.job.core.util.ThrowableUtil;
 import com.kl.job.core.util.XxlJobRemotingUtil;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.nio.ch.ThreadPool;
 
-import java.nio.charset.Charset;
 import java.util.concurrent.*;
 
 public class EmbedServer {
@@ -66,16 +65,50 @@ public class EmbedServer {
                                             .addLast(new IdleStateHandler(0, 0, 30 * 3, TimeUnit.SECONDS))
                                             .addLast(new HttpServerCodec())
                                             .addLast(new HttpObjectAggregator(5 * 1024 * 1024))
-                                            .addLast(new EmbedHttpServerHandler)
+                                            .addLast(new EmbedHttpServerHandler(executorBiz, accessToken, bizThreadPool));
                                 }
                             })
-                            .childOption();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
+                            .childOption(ChannelOption.SO_KEEPALIVE,true);
+                    ChannelFuture future = bootstrap.bind(port).sync();
+
+                    startRegistry(appname, address);
+                    future.channel().closeFuture().sync();
+                } catch (InterruptedException e) {
+                    if (e instanceof InterruptedException) {
+                        logger.info(">>>>>>>>>>> xxl-job remoting server stop.");
+                    } else {
+                        logger.error(">>>>>>>>>>> xxl-job remoting server error.", e);
+                    }
+                } finally {
+                    try {
+                        workerGroup.shutdownGracefully();
+                        bossGroup.shutdownGracefully();
+                    } catch (Exception e) {
+                        logger.error(e.getMessage(), e);
+                    }
                 }
             }
+
         });
+        thread.setDaemon(true);
+        thread.start();
     }
+
+    private void startRegistry(String appname, String address) {
+        ExecutorRegistryThread.getInstance().start(appname, address);
+    }
+
+    public void stop() throws Exception {
+        if (thread != null && thread.isAlive()) {
+            thread.interrupt();
+        }
+        stopRegistry();
+    }
+
+    private void stopRegistry() {
+        ExecutorRegistryThread.getInstance().toStop();
+    }
+
     public static class EmbedHttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
         private static final Logger logger = LoggerFactory.getLogger(EmbedHttpServerHandler.class);
@@ -110,9 +143,69 @@ public class EmbedServer {
         }
 
         private Object process(HttpMethod httpMethod, String uri, String requestData, String accessTokenReq) {
+            if (HttpMethod.POST != httpMethod) {
+                return new ReturnT<String>(ReturnT.FAIL_CODE,"invalid request, HttpMethod not support.");
+            }
+            if (uri == null || uri.trim().length() == 0) {
+                return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping empty.");
+            }
+            if (accessToken != null
+                    && accessToken.trim().length() > 0
+                    && !accessToken.equals(accessTokenReq)) {
+                return new ReturnT<String>(ReturnT.FAIL_CODE, "The access token is wrong.");
+            }
+
+            try {
+                if ("/beat".equals(uri)) {
+                    return executorBiz.beat();
+                } else if ("/idleBeat".equals(uri)) {
+                    IdleBeatParam idleBeatParam = GsonTool.fromJson(requestData, IdleBeatParam.class);
+                    return executorBiz.idleBeat(idleBeatParam);
+                } else if ("/run".equals(uri)) {
+                    TriggerParam triggerParam = GsonTool.fromJson(requestData, TriggerParam.class);
+                    return executorBiz.run(triggerParam);
+                } else if ("/kill".equals(uri)) {
+                    KillParam killParam = GsonTool.fromJson(requestData, KillParam.class);
+                    return executorBiz.kill(killParam);
+                } else if ("/log".equals(uri)) {
+                    LogParam logParam = GsonTool.fromJson(requestData, LogParam.class);
+                    return executorBiz.log(logParam);
+                }  else {
+                    return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping("+ uri +") not found.");
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                return new ReturnT<String>(ReturnT.FAIL_CODE, "request error:" + ThrowableUtil.toString(e));
+            }
         }
 
         private void writeResponse(ChannelHandlerContext ctx, boolean keepAlive, String responseJson) {
+            FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.copiedBuffer(responseJson, CharsetUtil.UTF_8));
+            response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html;charset=UTF-8");       // HttpHeaderValues.TEXT_PLAIN.toString()
+            response.headers().set(HttpHeaderNames.CONTENT_LENGTH, response.content().readableBytes());
+            if (keepAlive) {
+                response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
+            }
+            ctx.writeAndFlush(response);
+        }
+
+        @Override
+        public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+            ctx.flush();
+        }
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+            ctx.close();
+        }
+
+        @Override
+        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+            if (evt instanceof IdleStateEvent) {
+                ctx.channel().close();
+            } else {
+                super.userEventTriggered(ctx,evt);
+            }
         }
     }
 }
