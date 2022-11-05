@@ -25,7 +25,7 @@ public class MsgController extends BaseInfoProperties {
     private MsgService msgService;
 
     @GetMapping("list")
-    public GraceJSONResult list(@RequestParam String userId,
+    public GraceJSONResult list(@RequestParam Long userId,
                                 @RequestParam Integer page,
                                 @RequestParam Integer pageSize) {
 

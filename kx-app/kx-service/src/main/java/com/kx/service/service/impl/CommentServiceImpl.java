@@ -76,11 +76,11 @@ public class CommentServiceImpl extends BaseInfoProperties implements CommentSer
         msgContent.put("commentId", comment.getId());
         msgContent.put("commentContent", commentBO.getContent());//消息为评论/回复的具体内容
         //Integer type = MessageEnum.COMMENT_VLOG.type;//默认消息类型:评论视频
-        String receiverUserId= commentBO.getVlogerId();
+        Long receiverUserId= commentBO.getVlogerId();
         String routeType = MessageEnum.COMMENT_VLOG.enValue;//既是消息类型又是路由
         //当前评论有父评论,则消息类型是回复评论
-        if (StringUtils.isNotBlank(commentBO.getFatherCommentId()) &&
-                !commentBO.getFatherCommentId().equalsIgnoreCase("0") ) {
+        if (commentBO.getFatherCommentId() != null &&
+                commentBO.getFatherCommentId() > 0 ) {
             //查询被回复的这条评论的主人是谁,把系统消息发给他
             Comment fatherComment = getComment(commentBO.getFatherCommentId());
              receiverUserId = fatherComment.getCommentUserId();
@@ -104,8 +104,8 @@ public class CommentServiceImpl extends BaseInfoProperties implements CommentSer
     }
 
     @Override
-    public PagedGridResult queryVlogComments(String vlogId,
-                                             String userId,
+    public PagedGridResult queryVlogComments(Long vlogId,
+                                             Long userId,
                                              Integer page,
                                              Integer pageSize) {
         //1.查询评论数据
@@ -117,10 +117,10 @@ public class CommentServiceImpl extends BaseInfoProperties implements CommentSer
         List<CommentVO> list = commentMapperCustom.getCommentList(map);
         //2.遍历视频所有评论,查询单个评论的详情数据
         for (CommentVO cv:list) {
-            String commentId = cv.getCommentId();
+            Long commentId = cv.getCommentId();
 
             // 当前短视频的某个评论的点赞总数
-            String countsStr = redis.getHashValue(REDIS_VLOG_COMMENT_LIKED_COUNTS, commentId);
+            String countsStr = redis.getHashValue(REDIS_VLOG_COMMENT_LIKED_COUNTS, commentId.toString());
             Integer counts = 0;
             if (StringUtils.isNotBlank(countsStr)) {
                 counts = Integer.valueOf(countsStr);
@@ -138,9 +138,9 @@ public class CommentServiceImpl extends BaseInfoProperties implements CommentSer
     }
 
     @Override
-    public void deleteComment(String commentUserId,
-                              String commentId,
-                              String vlogId) {
+    public void deleteComment(Long commentUserId,
+                              Long commentId,
+                              Long vlogId) {
 
         Comment pendingDelete = new Comment();
         pendingDelete.setId(commentId);
@@ -158,7 +158,7 @@ public class CommentServiceImpl extends BaseInfoProperties implements CommentSer
      * @return
      */
     @Override
-    public Comment getComment(String id) {
+    public Comment getComment(Long id) {
         return commentMapper.selectByPrimaryKey(id);
     }
 }

@@ -5,9 +5,9 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="vloger_id" property="vlogerId" jdbcType="VARCHAR" />
-    <result column="fan_id" property="fanId" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="Long" />
+    <result column="vloger_id" property="vlogerId" jdbcType="Long" />
+    <result column="fan_id" property="fanId" jdbcType="Long" />
     <result column="is_fan_friend_of_mine" property="isFanFriendOfMine" jdbcType="INTEGER" />
   </resultMap>
 </mapper>

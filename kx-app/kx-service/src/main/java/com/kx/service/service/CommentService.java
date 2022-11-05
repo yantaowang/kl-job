@@ -15,20 +15,20 @@ public interface CommentService {
     /**
      * 查询评论的列表
      */
-    public PagedGridResult queryVlogComments(String vlogId,
-                                             String userId,
+    public PagedGridResult queryVlogComments(Long vlogId,
+                                             Long userId,
                                              Integer page,
                                              Integer pageSize);
 
     /**
      * 删除评论
      */
-    public void deleteComment(String commentUserId,
-                              String commentId,
-                              String vlogId);
+    public void deleteComment(Long commentUserId,
+                              Long commentId,
+                              Long vlogId);
 
     /**
      * 根据主键查询comment
      */
-    public Comment getComment(String id);
+    public Comment getComment(Long id);
 }

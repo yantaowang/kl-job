@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class UsersVO {
-    private String id;
+    private Long id;
     private String mobile;
     private String nickname;
     private String imoocNum;

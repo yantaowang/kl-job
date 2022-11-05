@@ -15,26 +15,26 @@ public interface VlogService {
     /**
      * 查询首页/搜索的vlog列表
      */
-    public PagedGridResult getIndexVlogList(String userId,
+    public PagedGridResult getIndexVlogList(Long userId,
                                             String search,
                                             Integer page,
                                             Integer pageSize);
     /**
      * 根据视频主键查询vlog
      */
-    public IndexVlogVO getVlogDetailById(String userId, String vlogId);
+    public IndexVlogVO getVlogDetailById(Long userId, Long vlogId);
 
     /**
      * 用户把视频改为公开/私密的视频
      */
-    public void changeToPrivateOrPublic(String userId,
-                                        String vlogId,
+    public void changeToPrivateOrPublic(Long userId,
+                                        Long vlogId,
                                         Integer yesOrNo);
 
     /**
      * 查询用的公开/私密的视频列表
      */
-    public PagedGridResult queryMyVlogList(String userId,
+    public PagedGridResult queryMyVlogList(Long userId,
                                            Integer page,
                                            Integer pageSize,
                                            Integer yesOrNo);
@@ -42,46 +42,46 @@ public interface VlogService {
     /**
      * 查询用户点赞过的短视频 用户主页点赞视频列表查询
      */
-    public PagedGridResult getMyLikedVlogList(String userId,
+    public PagedGridResult getMyLikedVlogList(Long userId,
                                               Integer page,
                                               Integer pageSize);
 
     /**
      * 点赞/喜欢某视频
      */
-    public void userLikeVlog(String userId, String vlogId);
+    public void userLikeVlog(Long userId, Long vlogId);
 
     /**
      * 用户取消点赞/喜欢视频
      */
-    public void userUnLikeVlog(String userId, String vlogId);
+    public void userUnLikeVlog(Long userId, Long vlogId);
 
     /**
      * 某视频获得用户点赞视频的总数
      */
-    public Integer getVlogBeLikedCounts(String vlogId);
+    public Integer getVlogBeLikedCounts(Long vlogId);
 
     /**
      * 查询用户关注的博主发布的短视频列表
      */
-    public PagedGridResult getMyFollowVlogList(String myId,
+    public PagedGridResult getMyFollowVlogList(Long myId,
                                                Integer page,
                                                Integer pageSize);
 
     /**
      * 查询朋友发布的短视频列表
      */
-    public PagedGridResult getMyFriendVlogList(String myId,
+    public PagedGridResult getMyFriendVlogList(Long myId,
                                                Integer page,
                                                Integer pageSize);
 
     /**
      * 根据主键查询vlog
      */
-    public Vlog getVlog(String id);
+    public Vlog getVlog(Long id);
 
     /**
      * 把counts输入数据库
      */
-    public void flushCounts(String vlogId, Integer counts);
+    public void flushCounts(Long vlogId, Integer counts);
 }

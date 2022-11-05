@@ -12,7 +12,7 @@ import java.util.List;
 public interface MessageRepository extends MongoRepository<MessageMO, String> {
 
     // 通过实现Repository，自定义条件查询
-    List<MessageMO> findAllByToUserIdEqualsOrderByCreateTimeDesc(String toUserId,
+    List<MessageMO> findAllByToUserIdEqualsOrderByCreateTimeDesc(Long toUserId,
                                                            Pageable pageable);
 //    void deleteAllByFromUserIdAndToUserIdAndMsgType();
 }

@@ -26,16 +26,16 @@ public class FansController extends BaseInfoProperties {
 
     @ApiOperation(value = "关注")//接口名
     @PostMapping("follow")
-    public GraceJSONResult follow(@RequestParam String myId,
-                                  @RequestParam String vlogerId) {
+    public GraceJSONResult follow(@RequestParam Long myId,
+                                  @RequestParam Long vlogerId) {
 
         //1 判断两个id不能为空
-        if (StringUtils.isBlank(myId) || StringUtils.isBlank(vlogerId)) {
+        if (myId == null || vlogerId == null) {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.SYSTEM_ERROR);
         }
 
         //2 判断当前用户，自己不能关注自己
-        if (myId.equalsIgnoreCase(vlogerId)) {
+        if (myId.equals(vlogerId)) {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.SYSTEM_RESPONSE_NO_INFO);
         }
 
@@ -63,8 +63,8 @@ public class FansController extends BaseInfoProperties {
 
     @ApiOperation(value = "取消关注")//接口名
     @PostMapping("cancel")
-    public GraceJSONResult cancel(@RequestParam String myId,
-                                  @RequestParam String vlogerId) {
+    public GraceJSONResult cancel(@RequestParam Long myId,
+                                  @RequestParam Long vlogerId) {
 
         //1 删除业务的执行
         fansService.doCancel(myId, vlogerId);
@@ -81,15 +81,15 @@ public class FansController extends BaseInfoProperties {
 
     @ApiOperation(value = "查询是否已关注作者")//接口名
     @GetMapping("queryDoIFollowVloger")
-    public GraceJSONResult queryDoIFollowVloger(@RequestParam String myId,
-                                                @RequestParam String vlogerId) {
+    public GraceJSONResult queryDoIFollowVloger(@RequestParam Long myId,
+                                                @RequestParam Long vlogerId) {
         //这里最好是去redis去查
         return GraceJSONResult.ok(fansService.queryDoIFollowVloger(myId, vlogerId));
     }
 
     @ApiOperation(value = "查询我的关注")//接口名
     @GetMapping("queryMyFollows")
-    public GraceJSONResult queryMyFollows(@RequestParam String myId,
+    public GraceJSONResult queryMyFollows(@RequestParam Long myId,
                                           @RequestParam Integer page,
                                           @RequestParam Integer pageSize) {
         return GraceJSONResult.ok(
@@ -100,7 +100,7 @@ public class FansController extends BaseInfoProperties {
     }
     @ApiOperation(value = "查询我的粉丝")//接口名
     @GetMapping("queryMyFans")
-    public GraceJSONResult queryMyFans(@RequestParam String myId,
+    public GraceJSONResult queryMyFans(@RequestParam Long myId,
                                        @RequestParam Integer page,
                                        @RequestParam Integer pageSize) {
         return GraceJSONResult.ok(

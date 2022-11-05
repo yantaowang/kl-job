@@ -15,16 +15,16 @@ import javax.validation.constraints.NotBlank;
 public class CommentBO {
 
     @NotBlank(message = "留言信息不完整")
-    private String vlogerId;
+    private Long vlogerId;
 
     @NotBlank(message = "留言信息不完整")
-    private String fatherCommentId;
+    private Long fatherCommentId;
 
     @NotBlank(message = "留言信息不完整")
-    private String vlogId;
+    private Long vlogId;
 
     @NotBlank(message = "当前用户信息不正确，请尝试重新登录")
-    private String commentUserId;
+    private Long commentUserId;
 
     @NotBlank(message = "评论内容不能为空")
     @Length(max = 50, message = "评论内容长度不能超过50")

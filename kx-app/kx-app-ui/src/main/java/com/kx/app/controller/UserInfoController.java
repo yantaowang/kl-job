@@ -32,7 +32,7 @@ public class UserInfoController extends BaseInfoProperties {
     @Autowired
     private MinIOConfig minIOConfig;
     @GetMapping("query")
-    public GraceJSONResult query(@RequestParam String userId) throws Exception {
+    public GraceJSONResult query(@RequestParam Long userId) throws Exception {
 
         Users user = userService.getUser(userId);
 
@@ -87,7 +87,7 @@ public class UserInfoController extends BaseInfoProperties {
 
     @ApiOperation(value = "修改用户头像/背景图")//接口名
     @PostMapping("modifyImage")
-    public GraceJSONResult modifyImage(@RequestParam String userId,
+    public GraceJSONResult modifyImage(@RequestParam Long userId,
                                        @RequestParam Integer type,
                                        MultipartFile file) throws Exception {
         //1.校验前端传的参数:文件类型 :1:头像 2:背景图

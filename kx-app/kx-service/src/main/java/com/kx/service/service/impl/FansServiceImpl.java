@@ -48,7 +48,7 @@ public class FansServiceImpl extends BaseInfoProperties implements FansService {
      */
     @Transactional
     @Override
-    public void doFollow(String myId, String vlogerId) {
+    public void doFollow(Long myId, Long vlogerId) {
 
         Fans fans = new Fans();
         fans.setFanId(myId);
@@ -90,7 +90,7 @@ public class FansServiceImpl extends BaseInfoProperties implements FansService {
      * @param vlogerId
      * @return
      */
-    public Fans queryFansRelationship(String fanId, String vlogerId) {
+    public Fans queryFansRelationship(Long fanId, Long vlogerId) {
         Example example = new Example(Fans.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("vlogerId", vlogerId);
@@ -113,7 +113,7 @@ public class FansServiceImpl extends BaseInfoProperties implements FansService {
      */
     @Transactional
     @Override
-    public void doCancel(String myId, String vlogerId) {
+    public void doCancel(Long myId, Long vlogerId) {
 
         //1 判断我们是否朋友关系，如果是，则需要取消双方的关系
         Fans fan = queryFansRelationship(myId, vlogerId);
@@ -129,13 +129,13 @@ public class FansServiceImpl extends BaseInfoProperties implements FansService {
     }
 
     @Override
-    public boolean queryDoIFollowVloger(String myId, String vlogerId) {
+    public boolean queryDoIFollowVloger(Long myId, Long vlogerId) {
         Fans vloger = queryFansRelationship(myId, vlogerId);
         return vloger != null;
     }
 
     @Override
-    public PagedGridResult queryMyFollows(String myId,
+    public PagedGridResult queryMyFollows(Long myId,
                                           Integer page,
                                           Integer pageSize) {
         Map<String, Object> map = new HashMap<>();
@@ -149,7 +149,7 @@ public class FansServiceImpl extends BaseInfoProperties implements FansService {
     }
 
     @Override
-    public PagedGridResult queryMyFans(String myId,
+    public PagedGridResult queryMyFans(Long myId,
                                        Integer page,
                                        Integer pageSize) {
 

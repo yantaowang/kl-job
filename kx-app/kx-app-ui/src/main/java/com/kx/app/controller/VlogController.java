@@ -41,7 +41,7 @@ public class VlogController extends BaseInfoProperties {
      * @return
      */
     @GetMapping("indexList")
-    public GraceJSONResult indexList(@RequestParam(defaultValue = "") String userId,
+    public GraceJSONResult indexList(@RequestParam(defaultValue = "") Long userId,
                                      @RequestParam(defaultValue = "") String search,
                                      @RequestParam Integer page,
                                      @RequestParam Integer pageSize) {
@@ -64,8 +64,8 @@ public class VlogController extends BaseInfoProperties {
      * @return
      */
     @GetMapping("detail")
-    public GraceJSONResult detail(@RequestParam(defaultValue = "") String userId,
-                                  @RequestParam String vlogId) {
+    public GraceJSONResult detail(@RequestParam(defaultValue = "") Long userId,
+                                  @RequestParam Long vlogId) {
         return GraceJSONResult.ok(vlogService.getVlogDetailById(userId, vlogId));
     }
 
@@ -76,8 +76,8 @@ public class VlogController extends BaseInfoProperties {
      * @return
      */
     @PostMapping("changeToPrivate")
-    public GraceJSONResult changeToPrivate(@RequestParam String userId,
-                                           @RequestParam String vlogId) {
+    public GraceJSONResult changeToPrivate(@RequestParam Long userId,
+                                           @RequestParam Long vlogId) {
         vlogService.changeToPrivateOrPublic(userId,
                 vlogId,
                 YesOrNo.YES.type);
@@ -91,8 +91,8 @@ public class VlogController extends BaseInfoProperties {
      * @return
      */
     @PostMapping("changeToPublic")
-    public GraceJSONResult changeToPublic(@RequestParam String userId,
-                                          @RequestParam String vlogId) {
+    public GraceJSONResult changeToPublic(@RequestParam Long userId,
+                                          @RequestParam Long vlogId) {
         vlogService.changeToPrivateOrPublic(userId,
                 vlogId,
                 YesOrNo.NO.type);
@@ -101,7 +101,7 @@ public class VlogController extends BaseInfoProperties {
 
     @ApiOperation(value = "查询我发布的公开视频")//接口名
     @GetMapping("myPublicList")
-    public GraceJSONResult myPublicList(@RequestParam String userId,
+    public GraceJSONResult myPublicList(@RequestParam Long userId,
                                         @RequestParam Integer page,
                                         @RequestParam Integer pageSize) {
         //有传分页则用前端的 没有在用后端默认的
@@ -121,7 +121,7 @@ public class VlogController extends BaseInfoProperties {
 
     @ApiOperation(value = "查询我的私密视频集合")//接口名
     @GetMapping("myPrivateList")
-    public GraceJSONResult myPrivateList(@RequestParam String userId,
+    public GraceJSONResult myPrivateList(@RequestParam Long userId,
                                          @RequestParam Integer page,
                                          @RequestParam Integer pageSize) {
 
@@ -141,7 +141,7 @@ public class VlogController extends BaseInfoProperties {
 
     @ApiOperation(value = "查询我赞过的视频集合")//用户主页点赞视频列表查询
     @GetMapping("myLikedList")
-    public GraceJSONResult myLikedList(@RequestParam String userId,
+    public GraceJSONResult myLikedList(@RequestParam Long userId,
                                        @RequestParam Integer page,
                                        @RequestParam Integer pageSize) {
 
@@ -161,9 +161,9 @@ public class VlogController extends BaseInfoProperties {
     private Integer nacosCounts;
     @ApiOperation(value = "点赞")//接口名
     @PostMapping("like")
-    public GraceJSONResult like(@RequestParam String userId,
-                                @RequestParam String vlogerId,
-                                @RequestParam String vlogId) {
+    public GraceJSONResult like(@RequestParam Long userId,
+                                @RequestParam Long vlogerId,
+                                @RequestParam Long vlogId) {
 
         // 我点赞的视频，关联关系保存到数据库
         vlogService.userLikeVlog(userId, vlogId);
@@ -191,9 +191,9 @@ public class VlogController extends BaseInfoProperties {
     }
     @ApiOperation(value = "取消点赞")//接口名
     @PostMapping("unlike")
-    public GraceJSONResult unlike(@RequestParam String userId,
-                                  @RequestParam String vlogerId,
-                                  @RequestParam String vlogId) {
+    public GraceJSONResult unlike(@RequestParam Long userId,
+                                  @RequestParam Long vlogerId,
+                                  @RequestParam Long vlogId) {
 
         //1. 我取消点赞的视频，关联关系删除
         vlogService.userUnLikeVlog(userId, vlogId);
@@ -207,13 +207,13 @@ public class VlogController extends BaseInfoProperties {
 
     @ApiOperation(value = "视频获赞总数查询")//用于点赞过后的刷新页面时更新点赞数量时调用
     @PostMapping("totalLikedCounts")
-    public GraceJSONResult totalLikedCounts(@RequestParam String vlogId) {
+    public GraceJSONResult totalLikedCounts(@RequestParam Long vlogId) {
         return GraceJSONResult.ok(vlogService.getVlogBeLikedCounts(vlogId));
     }
 
     @ApiOperation(value = "关注的作者的视频列表查询")
     @GetMapping("followList")
-    public GraceJSONResult followList(@RequestParam String myId,
+    public GraceJSONResult followList(@RequestParam Long myId,
                                       @RequestParam Integer page,
                                       @RequestParam Integer pageSize) {
 
@@ -232,7 +232,7 @@ public class VlogController extends BaseInfoProperties {
 
     @ApiOperation(value = "互粉的朋友的视频列表查询")
     @GetMapping("friendList")
-    public GraceJSONResult friendList(@RequestParam String myId,
+    public GraceJSONResult friendList(@RequestParam Long myId,
                                       @RequestParam Integer page,
                                       @RequestParam Integer pageSize) {
 

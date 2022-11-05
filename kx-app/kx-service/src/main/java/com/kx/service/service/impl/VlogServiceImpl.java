@@ -65,7 +65,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
     }
 
     @Override
-    public PagedGridResult getIndexVlogList(String userId,
+    public PagedGridResult getIndexVlogList(Long userId,
                                             String search,
                                             Integer page,
                                             Integer pageSize) {
@@ -79,10 +79,10 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogMapperCustom.getIndexVlogList(map);
         //遍历视频,并查询视频的`关注`/点赞信息
         for (IndexVlogVO v : list) {
-            String vlogerId = v.getVlogerId();
-            String vlogId = v.getVlogId();
+            Long vlogerId = v.getVlogerId();
+            Long vlogId = v.getVlogId();
 
-            if (StringUtils.isNotBlank(userId)) {
+            if (userId != null) {
                 // 用户是否关注该博主
                 boolean doIFollowVloger = fansService.queryDoIFollowVloger(userId, vlogerId);
                 v.setDoIFollowVloger(doIFollowVloger);
@@ -103,7 +103,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @param vlogId
      * @return
      */
-    private boolean doILikeVlog(String myId, String vlogId) {
+    private boolean doILikeVlog(Long myId, Long vlogId) {
 
         String doILike = redis.get(REDIS_USER_LIKE_VLOG + ":" + myId + ":" + vlogId);
         boolean isLike = false;
@@ -114,7 +114,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
     }
 
     @Override
-    public IndexVlogVO getVlogDetailById(String userId, String vlogId) {
+    public IndexVlogVO getVlogDetailById(Long userId, Long vlogId) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("vlogId", vlogId);
@@ -135,11 +135,11 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @param userId
      * @return
      */
-    private IndexVlogVO setterVO(IndexVlogVO v, String userId) {
-        String vlogerId = v.getVlogerId();
-        String vlogId = v.getVlogId();
+    private IndexVlogVO setterVO(IndexVlogVO v, Long userId) {
+        Long vlogerId = v.getVlogerId();
+        Long vlogId = v.getVlogId();
 
-        if (StringUtils.isNotBlank(userId)) {
+        if (userId != null) {
             // 用户是否关注该博主
             boolean doIFollowVloger = fansService.queryDoIFollowVloger(userId, vlogerId);
             v.setDoIFollowVloger(doIFollowVloger);
@@ -156,8 +156,8 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
 
     @Transactional
     @Override
-    public void changeToPrivateOrPublic(String userId,
-                                        String vlogId,
+    public void changeToPrivateOrPublic(Long userId,
+                                        Long vlogId,
                                         Integer yesOrNo) {
         Example example = new Example(Vlog.class);
         Example.Criteria criteria = example.createCriteria();
@@ -179,7 +179,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @return
      */
     @Override
-    public PagedGridResult queryMyVlogList(String userId,
+    public PagedGridResult queryMyVlogList(Long userId,
                                            Integer page,
                                            Integer pageSize,
                                            Integer yesOrNo) {
@@ -203,7 +203,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @return
      */
     @Override
-    public PagedGridResult getMyLikedVlogList(String userId,
+    public PagedGridResult getMyLikedVlogList(Long userId,
                                               Integer page,
                                               Integer pageSize) {
         PageHelper.startPage(page, pageSize);
@@ -221,7 +221,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      */
     @Transactional
     @Override
-    public void userLikeVlog(String userId, String vlogId) {
+    public void userLikeVlog(Long userId, Long vlogId) {
         MyLikedVlog likedVlog = new MyLikedVlog();
         likedVlog.setVlogId(vlogId);
         likedVlog.setUserId(userId);
@@ -252,7 +252,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
     }
 
     @Override
-    public Vlog getVlog(String id) {
+    public Vlog getVlog(Long id) {
         return vlogMapper.selectByPrimaryKey(id);
     }
     /**
@@ -262,7 +262,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      */
     @Transactional
     @Override
-    public void userUnLikeVlog(String userId, String vlogId) {
+    public void userUnLikeVlog(Long userId, Long vlogId) {
 
         MyLikedVlog likedVlog = new MyLikedVlog();
         likedVlog.setVlogId(vlogId);
@@ -277,7 +277,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @return
      */
     @Override
-    public Integer getVlogBeLikedCounts(String vlogId) {
+    public Integer getVlogBeLikedCounts(Long vlogId) {
         String countsStr = redis.get(REDIS_VLOG_BE_LIKED_COUNTS + ":" + vlogId);
         if (StringUtils.isBlank(countsStr)) {
             countsStr = "0";
@@ -293,7 +293,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @return
      */
     @Override
-    public PagedGridResult getMyFollowVlogList(String myId,
+    public PagedGridResult getMyFollowVlogList(Long myId,
                                                Integer page,
                                                Integer pageSize) {
         PageHelper.startPage(page, pageSize);
@@ -304,10 +304,10 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogMapperCustom.getMyFollowVlogList(map);
 
         for (IndexVlogVO v : list) {
-            String vlogerId = v.getVlogerId();
-            String vlogId = v.getVlogId();
+            Long vlogerId = v.getVlogerId();
+            Long vlogId = v.getVlogId();
 
-            if (StringUtils.isNotBlank(myId)) {
+            if (myId != null) {
                 // 用户必定关注该博主
                 v.setDoIFollowVloger(true);
 
@@ -330,7 +330,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      * @return
      */
     @Override
-    public PagedGridResult getMyFriendVlogList(String myId,
+    public PagedGridResult getMyFriendVlogList(Long myId,
                                                Integer page,
                                                Integer pageSize) {
 
@@ -342,10 +342,10 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
         List<IndexVlogVO> list = vlogMapperCustom.getMyFriendVlogList(map);
 
         for (IndexVlogVO v : list) {
-            String vlogerId = v.getVlogerId();
-            String vlogId = v.getVlogId();
+            Long vlogerId = v.getVlogerId();
+            Long vlogId = v.getVlogId();
 
-            if (StringUtils.isNotBlank(myId)) {
+            if (myId != null) {
                 // 用户必定关注该博主
                 v.setDoIFollowVloger(true);
 
@@ -367,7 +367,7 @@ public class VlogServiceImpl extends BaseInfoProperties implements VlogService {
      */
     @Transactional
     @Override
-    public void flushCounts(String vlogId, Integer counts) {
+    public void flushCounts(Long vlogId, Integer counts) {
 
         Vlog vlog = new Vlog();
         vlog.setId(vlogId);

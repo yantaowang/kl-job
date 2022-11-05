@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class VlogerVO {
-    private String vlogerId;
+    private Long vlogerId;
     private String nickname;
     private String face;
     private boolean isFollowed = true;

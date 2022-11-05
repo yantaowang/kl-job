@@ -19,17 +19,17 @@ import java.util.Map;
 public class MessageMO {
 
     @Id//配置成主键,新增数据时,mongodb会自动为其赋值
-    private String id;                  // 消息主键id
+    private Long id;                  // 消息主键id
 
     @Field("fromUserId")
-    private String fromUserId;          // 消息来自的用户id
+    private Long fromUserId;          // 消息来自的用户id
     @Field("fromNickname")
     private String fromNickname;        // 消息来自的用户昵称
     @Field("fromFace")
     private String fromFace;            // 消息来自的用户头像
 
     @Field("toUserId")
-    private String toUserId;            // 消息发送到某对象的用户id
+    private Long toUserId;            // 消息发送到某对象的用户id
 
     @Field("msgType")
     private Integer msgType;             // 消息类型 枚举

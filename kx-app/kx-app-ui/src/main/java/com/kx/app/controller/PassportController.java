@@ -102,7 +102,7 @@ public class PassportController extends BaseInfoProperties {
     }
     @ApiOperation(value = "用户注销接口")
     @PostMapping("logout")
-    public GraceJSONResult logout(@RequestParam String userId,
+    public GraceJSONResult logout(@RequestParam Long userId,
                                   HttpServletRequest request) throws Exception {
 
         // 后端只需要清除用户的token信息即可，前端也需要清除，清除本地app中的用户信息和token会话信息

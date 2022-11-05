@@ -18,7 +18,7 @@ public interface UserService {
     /**
      * 根据用户主键查询用户信息
      */
-    public Users getUser(String userId);
+    public Users getUser(Long userId);
 
     /**
      * 用户信息修改

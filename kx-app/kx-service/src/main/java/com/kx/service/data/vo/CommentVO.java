@@ -12,13 +12,13 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class CommentVO {
-    private String id;
-    private String commentId;
-    private String vlogerId;
+    private Long id;
+    private Long commentId;
+    private Long vlogerId;
     private String fatherCommentId;
-    private String vlogId;
+    private Long vlogId;
     //评论者id,名称和头像
-    private String commentUserId;
+    private Long commentUserId;
     private String commentUserNickname;
     private String commentUserFace;
     private String content;

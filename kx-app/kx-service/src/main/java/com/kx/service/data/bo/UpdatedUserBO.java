@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class UpdatedUserBO {
-    private String id;
+    private Long id;
     private String nickname;
     private String imoocNum;
     private String face;

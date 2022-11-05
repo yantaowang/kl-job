@@ -29,8 +29,8 @@ public class MsgServiceImpl extends BaseInfoProperties implements MsgService {
     private UserService userService;
 
     @Override
-    public void createMsg(String fromUserId,
-                          String toUserId,
+    public void createMsg(Long fromUserId,
+                          Long toUserId,
                           Integer type,
                           Map msgContent) {
         //1.从数据库拿到发消息的用户数据 再加收消息的人的数据 再加消息内容 存到mongodb
@@ -62,7 +62,7 @@ public class MsgServiceImpl extends BaseInfoProperties implements MsgService {
      * @return
      */
     @Override
-    public List<MessageMO> queryList(String toUserId,
+    public List<MessageMO> queryList(Long toUserId,
                                      Integer page,
                                      Integer pageSize) {
 

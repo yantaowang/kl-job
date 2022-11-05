@@ -20,11 +20,11 @@ public class UserTokenInterceptor extends BaseInfoProperties implements HandlerI
 
 
         //1. 从header中获得用户id和token
-        String userId = request.getHeader("headerUserId");
+        Long userId = Long.valueOf(request.getHeader("headerUserId"));
         String userToken = request.getHeader("headerUserToken");
 
         //2.判断header中用户id和token不能为空
-        if (StringUtils.isNotBlank(userId) && StringUtils.isNotBlank(userToken)) {
+        if (userId != null && StringUtils.isNotBlank(userToken)) {
             String redisToken = redis.get(REDIS_USER_TOKEN + ":" + userId);
             if (StringUtils.isBlank(redisToken)) {
                 GraceException.display(ResponseStatusEnum.UN_LOGIN);
