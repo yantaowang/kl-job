@@ -1,21 +1,21 @@
 package com.kl.job.core.biz.impl;
 
-import com.kl.job.core.biz.AdminBiz;
 import com.kl.job.core.biz.ExecutorBiz;
 import com.kl.job.core.biz.model.*;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExecutorBizImpl implements ExecutorBiz {
+    private static Logger logger = LoggerFactory.getLogger(ExecutorBizImpl.class);
 
     @Override
     public ReturnT<String> beat() {
-        return null;
+        return ReturnT.SUCCESS;
     }
 
     @Override
     public ReturnT<String> idleBeat(IdleBeatParam idleBeatParam) {
-        return null;
+        return
     }
 
     @Override

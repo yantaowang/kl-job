@@ -8,6 +8,7 @@ import com.kl.job.core.biz.handler.impl.MethodJobHandler;
 import com.kl.job.core.log.XxlJobFileAppender;
 import com.kl.job.core.server.EmbedServer;
 import com.kl.job.core.thread.JobLogFileCleanThread;
+import com.kl.job.core.thread.JobThread;
 import com.kl.job.core.util.IpUtil;
 import com.kl.job.core.util.NetUtil;
 import org.slf4j.Logger;
@@ -157,6 +158,14 @@ public class XxlJobExecutor {
             }
         }
         newRegistJobHandler(name, new MethodJobHandler(bean, executeMethod, initMethod, destroyMethod));
+    }
+
+
+
+
+    public static JobThread removeJobThread(int jobId, String removeOldReason) {
+        JobThread oldJobThread = job.remove(jobId);
+
     }
 
 

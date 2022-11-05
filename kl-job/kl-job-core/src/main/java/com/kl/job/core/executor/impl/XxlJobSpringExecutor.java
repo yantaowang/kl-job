@@ -27,6 +27,11 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
     public void afterSingletonsInstantiated() {
        initJobHandlerMethodRepository(applicationContext);
 
+        try {
+            super.start();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void initJobHandlerMethodRepository(ApplicationContext applicationContext) {
