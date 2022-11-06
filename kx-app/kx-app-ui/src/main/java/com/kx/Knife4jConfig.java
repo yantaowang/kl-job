@@ -1,4 +1,4 @@
-package com.kx.app;
+package com.kx;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

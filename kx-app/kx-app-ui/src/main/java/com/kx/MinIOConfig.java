@@ -1,4 +1,4 @@
-package com.kx.app;
+package com.kx;
 
 import com.kx.common.utils.MinIOUtils;
 import lombok.Data;

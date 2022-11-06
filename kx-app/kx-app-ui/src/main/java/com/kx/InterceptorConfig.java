@@ -1,7 +1,7 @@
-package com.kx.app;
+package com.kx;
 
-import com.kx.app.intercepter.PassportInterceptor;
-import com.kx.app.intercepter.UserTokenInterceptor;
+import com.kx.intercepter.PassportInterceptor;
+import com.kx.intercepter.UserTokenInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

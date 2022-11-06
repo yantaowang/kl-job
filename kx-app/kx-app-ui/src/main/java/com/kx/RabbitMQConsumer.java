@@ -1,4 +1,4 @@
-package com.kx.app;
+package com.kx;
 
 import com.kx.common.enums.MessageEnum;
 import com.kx.common.exceptions.GraceException;

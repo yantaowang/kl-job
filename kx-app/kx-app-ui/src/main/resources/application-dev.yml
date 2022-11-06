@@ -4,9 +4,9 @@ spring:
   datasource:                                     # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource      # 数据源的类型，可以更改为其他的数据源配置，比如druid
     driver-class-name: com.mysql.jdbc.Driver      # mysql/MariaDB 的数据库驱动类名称
-    url: jdbc:mysql://127.0.0.1:3306/imooc-red-book?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/kx-app?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC&useSSL=false
     username: root
-    password: 9596
+    password: ams2020
     hikari:
       connection-timeout: 30000               # 等待连接池分配连接的最大时间（毫秒），超过这个时长还没有可用的连接，则会抛出SQLException
       minimum-idle: 5                         # 最小连接数
@@ -21,12 +21,12 @@ spring:
     host: localhost
     port: 6379
     database: 0
-    password: 123456
+    password:
   #mongodb连接配置
   data:
     mongodb:
-      uri: mongodb://root:root@192.168.1.101:27017
-      database: imooc-red-book
+      uri: mongodb://MongoDB:123456@127.0.0.1:27017
+      database: kx-app
   #rabbitmq连接配置
   rabbitmq:
     host: 192.168.1.101

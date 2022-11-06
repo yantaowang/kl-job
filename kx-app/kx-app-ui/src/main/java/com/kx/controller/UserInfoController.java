@@ -1,7 +1,7 @@
-package com.kx.app.controller;
+package com.kx.controller;
 
 
-import com.kx.app.MinIOConfig;
+import com.kx.MinIOConfig;
 import com.kx.common.enums.FileTypeEnum;
 import com.kx.common.enums.UserInfoModifyType;
 import com.kx.common.result.GraceJSONResult;

@@ -1,4 +1,4 @@
-package com.kx.app.intercepter;
+package com.kx.intercepter;
 
 import com.kx.common.exceptions.GraceException;
 import com.kx.common.result.ResponseStatusEnum;

@@ -1,4 +1,4 @@
-package com.kx.app.controller;
+package com.kx.controller;
 
 import com.kx.common.enums.YesOrNo;
 import com.kx.common.result.GraceJSONResult;
