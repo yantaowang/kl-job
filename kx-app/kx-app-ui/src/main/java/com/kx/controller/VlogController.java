@@ -157,8 +157,8 @@ public class VlogController extends BaseInfoProperties {
                 pageSize);
         return GraceJSONResult.ok(gridResult);
     }
-    @Value("${nacos.counts}")
-    private Integer nacosCounts;
+//    @Value("${nacos.counts:1}")
+    private static Integer nacosCounts=3;
     @ApiOperation(value = "点赞")//接口名
     @PostMapping("like")
     public GraceJSONResult like(@RequestParam Long userId,

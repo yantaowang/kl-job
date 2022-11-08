@@ -1,6 +1,6 @@
 spring:
   application:
-    name: douyin-red-book-nacos
+    name: kx-app
   cloud:
     nacos:
       config:

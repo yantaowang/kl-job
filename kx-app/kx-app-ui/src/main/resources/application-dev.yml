@@ -25,7 +25,7 @@ spring:
   #mongodb连接配置
   data:
     mongodb:
-      uri: mongodb://MongoDB:123456@127.0.0.1:27017
+      uri: mongodb://MongoDB:MongoDB@127.0.0.1:27017
       database: kx-app
   #rabbitmq连接配置
   rabbitmq:

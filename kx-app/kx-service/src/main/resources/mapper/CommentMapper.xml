@@ -5,11 +5,11 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" property="id" jdbcType="Long" />
-    <result column="vloger_id" property="vlogerId" jdbcType="Long" />
-    <result column="father_comment_id" property="fatherCommentId" jdbcType="Long" />
-    <result column="vlog_id" property="vlogId" jdbcType="Long" />
-    <result column="comment_user_id" property="commentUserId" jdbcType="Long" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="vloger_id" property="vlogerId" jdbcType="BIGINT" />
+    <result column="father_comment_id" property="fatherCommentId" jdbcType="BIGINT" />
+    <result column="vlog_id" property="vlogId" jdbcType="BIGINT" />
+    <result column="comment_user_id" property="commentUserId" jdbcType="BIGINT" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="like_counts" property="likeCounts" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
