@@ -31,9 +31,9 @@ import java.util.UUID;
 
 @Slf4j
 @Api(tags = "PassportController 通信证接口模块")
-@RequestMapping("passport")
+@RequestMapping("login")
 @RestController
-public class PassportController extends BaseInfoProperties {
+public class LoginController extends BaseInfoProperties {
     @Autowired
     private SMSUtils smsUtils;
     @Autowired

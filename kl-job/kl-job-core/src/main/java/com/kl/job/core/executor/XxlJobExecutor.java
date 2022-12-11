@@ -86,7 +86,7 @@ public class XxlJobExecutor {
 
         if (address == null || address.trim().length() == 0) {
             String ip_port_address = IpUtil.getIpPort(ip, port);
-            address = "htto://{ip_port}/".replace("{ip_port}", ip_port_address);
+            address = "http://{ip_port}/".replace("{ip_port}", ip_port_address);
         }
 
         if (StringUtils.isEmpty(accessToken)) {
@@ -164,8 +164,8 @@ public class XxlJobExecutor {
 
 
     public static JobThread removeJobThread(int jobId, String removeOldReason) {
-        JobThread oldJobThread = job.remove(jobId);
-
+        // TODO: 2022-12-07  removeJobThread
+        return null;
     }
 
 

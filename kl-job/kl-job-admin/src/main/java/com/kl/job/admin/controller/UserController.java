@@ -8,7 +8,6 @@ import com.kl.job.admin.dao.XxlJobGroupDao;
 import com.kl.job.admin.dao.XxlJobUserDao;
 import com.kl.job.admin.service.LoginService;
 import com.kl.job.core.biz.model.ReturnT;
-import com.kl.job.core.biz.model.ReturnT;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
