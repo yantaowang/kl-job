@@ -1,6 +1,5 @@
 package com.kl.job.admin.service.impl;
 
-import com.kl.job.admin.core.cron.CronExpression;
 import com.kl.job.admin.core.model.XxlJobGroup;
 import com.kl.job.admin.core.model.XxlJobInfo;
 import com.kl.job.admin.core.model.XxlJobLogReport;

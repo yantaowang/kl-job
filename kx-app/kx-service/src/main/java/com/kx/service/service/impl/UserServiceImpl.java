@@ -7,6 +7,7 @@ import com.kx.common.exceptions.GraceException;
 import com.kx.common.result.ResponseStatusEnum;
 import com.kx.common.utils.DateUtil;
 import com.kx.common.utils.DesensitizationUtil;
+import com.kx.service.data.bo.RegistLoginBO;
 import com.kx.service.data.bo.UpdatedUserBO;
 import com.kx.service.data.pojo.Users;
 import com.kx.service.mapper.UsersMapper;
@@ -36,6 +37,15 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public Users queryByUnionId(String unionId) {
+        Example userExample = new Example(Users.class);
+        Example.Criteria criteria = userExample.createCriteria();
+        criteria.andEqualTo("union_id", unionId);
+        Users user = usersMapper.selectOneByExample(userExample);
+        return user;
+    }
+
     @Transactional
     @Override
     public Users createUser(String mobile) {
@@ -46,6 +56,34 @@ public class UserServiceImpl implements UserService {
         user.setNickname("用户：" + DesensitizationUtil.commonDisplay(mobile));//脱敏工具脱敏
         user.setImoocNum("用户：" + DesensitizationUtil.commonDisplay(mobile));
         user.setFace(USER_FACE1);
+
+        user.setBirthday(DateUtil.stringToDate("1900-01-01"));
+        user.setSex(Sex.secret.type);
+
+        user.setCountry("中国");
+        user.setProvince("");
+        user.setCity("");
+        user.setDistrict("");
+        user.setDescription("这家伙很懒，什么都没留下~");
+        user.setCanImoocNumBeUpdated(YesOrNo.YES.type);
+
+        user.setCreatedTime(new Date());
+        user.setUpdatedTime(new Date());
+
+        usersMapper.insert(user);
+
+        return user;
+    }
+
+    @Override
+    public Users createUser(RegistLoginBO registLoginBO) {
+
+        // 获得全局唯一主键
+        Users user = new Users();
+        user.setMobile(registLoginBO.getMobile());
+        user.setNickname(registLoginBO.getNickname());//脱敏工具脱敏
+        user.setFace(registLoginBO.getFace());
+        user.setUionId(registLoginBO.getUionId());
 
         user.setBirthday(DateUtil.stringToDate("1900-01-01"));
         user.setSex(Sex.secret.type);

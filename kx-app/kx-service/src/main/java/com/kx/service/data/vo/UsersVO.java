@@ -1,5 +1,6 @@
 package com.kx.service.data.vo;
 
+import com.kx.service.util.token.Token;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Date;
 public class UsersVO {
     private Long id;
     private String mobile;
+    private String unionId;
     private String nickname;
     private String imoocNum;
     private String face;
@@ -29,11 +31,10 @@ public class UsersVO {
     private Date createdTime;
     private Date updatedTime;
 
-    private String userToken;       // 用户token，传递给前端
-
     private Integer myFollowsCounts;
     private Integer myFansCounts;
 //    private Integer myLikedVlogCounts;
     private Integer totalLikeMeCounts;
 
+    private Token token;
 }

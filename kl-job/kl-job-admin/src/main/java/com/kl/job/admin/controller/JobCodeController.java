@@ -1,12 +1,12 @@
 package com.kl.job.admin.controller;
 
-import com.kl.job.admin.core.model.XxlJobInfo;
-import com.kl.job.admin.core.model.XxlJobLogGlue;
-import com.kl.job.admin.core.util.I18nUtil;
-import com.kl.job.admin.dao.XxlJobInfoDao;
-import com.kl.job.admin.dao.XxlJobLogGlueDao;
-import com.kl.job.core.biz.model.ReturnT;
-import com.kl.job.core.glue.GlueTypeEnum;
+import com.xxl.job.admin.core.model.XxlJobInfo;
+import com.xxl.job.admin.core.model.XxlJobLogGlue;
+import com.xxl.job.admin.core.util.I18nUtil;
+import com.xxl.job.admin.dao.XxlJobInfoDao;
+import com.xxl.job.admin.dao.XxlJobLogGlueDao;
+import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.glue.GlueTypeEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ public class JobCodeController {
 		}
 
 		// valid permission
-		JobInfoController.validPermission(request, jobInfo.getJobGroup());
+		com.xxl.job.admin.controller.JobInfoController.validPermission(request, jobInfo.getJobGroup());
 
 		// Glue类型-字典
 		model.addAttribute("GlueTypeEnum", GlueTypeEnum.values());

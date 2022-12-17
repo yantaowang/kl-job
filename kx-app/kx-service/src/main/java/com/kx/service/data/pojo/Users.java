@@ -16,6 +16,8 @@ public class Users {
      */
     private String mobile;
 
+    private String uionId;
+
     /**
      * 昵称，媒体号
      */

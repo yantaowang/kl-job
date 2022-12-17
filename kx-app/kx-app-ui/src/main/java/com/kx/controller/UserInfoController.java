@@ -75,13 +75,8 @@ public class UserInfoController extends BaseInfoProperties {
     }
 
     @PostMapping("modifyUserInfo")
-    public GraceJSONResult modifyUserInfo(@RequestBody UpdatedUserBO updatedUserBO,
-                                          @RequestParam Integer type) throws Exception {
-
-        UserInfoModifyType.checkUserInfoTypeIsRight(type);
-
-        Users newUserInfo = userService.updateUserInfo(updatedUserBO, type);
-
+    public GraceJSONResult modifyUserInfo(@RequestBody UpdatedUserBO updatedUserBO) throws Exception {
+        Users newUserInfo = userService.updateUserInfo(updatedUserBO);
         return GraceJSONResult.ok(newUserInfo);
     }
 
