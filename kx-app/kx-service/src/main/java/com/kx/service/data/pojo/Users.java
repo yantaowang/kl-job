@@ -1,6 +1,8 @@
 package com.kx.service.data.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -16,7 +18,8 @@ public class Users {
      */
     private String mobile;
 
-    private String uionId;
+    private String unionId;
+    private String openId;
 
     /**
      * 昵称，媒体号
@@ -42,6 +45,8 @@ public class Users {
     /**
      * 生日
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     /**
@@ -68,6 +73,9 @@ public class Users {
      * 简介
      */
     private String description;
+
+    private String company;
+    private String job;
 
     /**
      * 个人介绍的背景图

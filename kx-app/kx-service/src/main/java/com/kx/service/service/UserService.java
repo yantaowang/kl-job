@@ -37,4 +37,9 @@ public interface UserService {
      * 用户信息修改
      */
     public Users updateUserInfo(UpdatedUserBO updatedUserBO, Integer type);
+
+    /**
+     * 根据用户主键查询用户信息
+     */
+    public Users getUserInfo();
 }

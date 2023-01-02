@@ -1,13 +1,13 @@
 package com.kl.job.admin.controller;
 
-import com.xxl.job.admin.controller.annotation.PermissionLimit;
-import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
-import com.xxl.job.core.biz.AdminBiz;
-import com.xxl.job.core.biz.model.HandleCallbackParam;
-import com.xxl.job.core.biz.model.RegistryParam;
-import com.xxl.job.core.biz.model.ReturnT;
-import com.xxl.job.core.util.GsonTool;
-import com.xxl.job.core.util.XxlJobRemotingUtil;
+import com.kl.job.admin.controller.annotation.PermissionLimit;
+import com.kl.job.admin.core.conf.XxlJobAdminConfig;
+import com.kl.job.core.biz.AdminBiz;
+import com.kl.job.core.biz.model.HandleCallbackParam;
+import com.kl.job.core.biz.model.RegistryParam;
+import com.kl.job.core.biz.model.ReturnT;
+import com.kl.job.core.util.GsonTool;
+import com.kl.job.core.util.XxlJobRemotingUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

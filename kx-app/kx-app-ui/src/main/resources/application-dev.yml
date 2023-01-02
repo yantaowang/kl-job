@@ -3,8 +3,7 @@ server:
 spring:
   datasource:                                     # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource      # 数据源的类型，可以更改为其他的数据源配置，比如druid
-    driver-class-name: com.mysql.jdbc.Driver      # mysql/MariaDB 的数据库驱动类名称
-    url: jdbc:mysql://127.0.0.1:3306/kx-app?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3358/kx-app?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC&useSSL=false
     username: root
     password: ams2020
     hikari:
@@ -29,11 +28,11 @@ spring:
       database: kx-app
   #rabbitmq连接配置
   rabbitmq:
-    host: 192.168.1.101
+    host: 47.93.244.107
     port: 5672
     username: admin
-    password: 123456
-    virtual-host: douyin-red-book
+    password: admin
+    virtual-host: kx
   #配置服务名
 #  application:
 #    name: douyin-red-book-nacos
@@ -51,10 +50,10 @@ management:
 
 # MinIO 配置
 minio:
-  endpoint: http://192.168.1.101:9000      # MinIO服务地址 这里的端口不是自己配置的端口?
-  fileHost: http://192.168.1.101:9000      # 文件地址host 这里的端口不是自己配置的端口?
-  bucketName: panpan                      # 存储桶bucket名称
-  accessKey: ROOT                         # 用户名
-  secretKey: 12345678                     # 密码
+  endpoint: http://47.93.244.107:9000      # MinIO服务地址 这里的端口不是自己配置的端口?
+  fileHost: http://47.93.244.107:9000      # 文件地址host 这里的端口不是自己配置的端口?
+  bucketName: kxw                      # 存储桶bucket名称
+  accessKey: admin                         # 用户名
+  secretKey: admin123456                     # 密码
   imgSize: 1024                           # 图片大小限制，单位：m
   fileSize: 1024                          # 文件大小限制，单位：m

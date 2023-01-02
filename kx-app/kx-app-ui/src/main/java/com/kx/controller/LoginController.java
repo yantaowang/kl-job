@@ -1,6 +1,7 @@
 package com.kx.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.kx.common.enums.UserEnums;
 import com.kx.common.result.GraceJSONResult;
 import com.kx.common.utils.IPUtil;
@@ -10,6 +11,7 @@ import com.kx.service.data.bo.RegistLoginBO;
 import com.kx.service.data.pojo.Users;
 import com.kx.service.data.vo.UsersVO;
 import com.kx.service.service.UserService;
+import com.kx.service.service.WechatService;
 import com.kx.service.util.token.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +37,9 @@ public class LoginController extends BaseInfoProperties {
     @Autowired
     private TokenUtil tokenUtil;
 
+    @Autowired
+    private WechatService wechatService;
+
     @PostMapping("getSMSCode")
     public GraceJSONResult getSMSCode(@RequestParam String mobile,
                                       HttpServletRequest request) throws Exception {
@@ -56,7 +61,7 @@ public class LoginController extends BaseInfoProperties {
         return GraceJSONResult.ok();
     }
 
-    @PostMapping("login")//@Valid开启请求参数校验,校验出的错误存到BindingResult
+    @PostMapping("auto-login")//@Valid开启请求参数校验,校验出的错误存到BindingResult
     public GraceJSONResult login(@Valid @RequestBody RegistLoginBO registLoginBO,
 //                                 BindingResult result,    // 对代码有侵入性
                                  HttpServletRequest request) throws Exception {
@@ -66,9 +71,16 @@ public class LoginController extends BaseInfoProperties {
 //            Map<String, String> map = getErrors(result);
 //            return GraceJSONResult.errorMap(map);
 //        }
+        JSONObject json = wechatService.getUnionIdInfo(registLoginBO.getCode());
+        //存储session key 后续登录用得到
+        String sessionKey = json.getString("session_key");
+        String unionId = json.getString("unionid");
+        String openId = json.getString("openid");
+        registLoginBO.setUnionId(unionId);
+        registLoginBO.setOpenId(openId);
 
         // 2. 查询数据库，判断用户是否存在
-        Users user = userService.queryByUnionId(registLoginBO.getUionId());
+        Users user = userService.queryByUnionId(registLoginBO.getOpenId());
         if (user == null) {
             // 2.1 如果用户为空，表示没有注册过，则为null，需要注册信息入库
             user = userService.createUser(registLoginBO);
@@ -77,7 +89,7 @@ public class LoginController extends BaseInfoProperties {
         // 5. 返回用户信息，包含token令牌
         UsersVO usersVO = new UsersVO();
         BeanUtils.copyProperties(user, usersVO);
-        usersVO.setToken(tokenUtil.createToken(user.getNickname(), user, true, UserEnums.MEMBER));
+        usersVO.setToken(tokenUtil.createToken(user.getOpenId(), user, true, UserEnums.MEMBER));
 
         return GraceJSONResult.ok(usersVO);
     }

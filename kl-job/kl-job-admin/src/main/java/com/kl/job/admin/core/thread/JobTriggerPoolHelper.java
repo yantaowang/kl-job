@@ -1,5 +1,6 @@
 package com.kl.job.admin.core.thread;
 
+import com.kl.job.admin.core.conf.XxlJobAdminConfig;
 import com.kl.job.admin.core.trigger.TriggerTypeEnum;
 import com.kl.job.admin.core.trigger.XxlJobTrigger;
 import org.slf4j.Logger;

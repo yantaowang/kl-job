@@ -8,11 +8,13 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Api(tags = "FileController 文件上传测试的接口")
+@RequestMapping("/common/file")
 @RestController
 public class FileController {
 
@@ -25,7 +27,7 @@ public class FileController {
      * @return
      * @throws Exception
      */
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public GraceJSONResult upload(MultipartFile file) throws Exception {
 
         String fileName = file.getOriginalFilename();

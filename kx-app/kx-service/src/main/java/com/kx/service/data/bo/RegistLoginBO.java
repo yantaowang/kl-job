@@ -28,7 +28,9 @@ public class RegistLoginBO {
      */
     private String mobile;
 
-    private String uionId;
+    private String unionId;
+
+    private String openId;
 
     /**
      * 昵称，媒体号
@@ -90,4 +92,5 @@ public class RegistLoginBO {
      */
     private Date updatedTime;
 
+    private String code;
 }

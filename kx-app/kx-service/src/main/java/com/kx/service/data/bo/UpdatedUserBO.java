@@ -15,6 +15,7 @@ public class UpdatedUserBO {
     private Long id;
     private String nickname;
     private String imoocNum;
+    private String mobile;
     private String face;
     private Integer sex;
     private Date birthday;
@@ -25,4 +26,6 @@ public class UpdatedUserBO {
     private String description;
     private String bgImg;
     private Integer canImoocNumBeUpdated;
+    private String company;
+    private String job;
 }

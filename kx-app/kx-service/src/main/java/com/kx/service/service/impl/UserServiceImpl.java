@@ -1,17 +1,21 @@
 package com.kx.service.service.impl;
 
+import com.kx.common.enums.ResultCode;
 import com.kx.common.enums.Sex;
 import com.kx.common.enums.UserInfoModifyType;
 import com.kx.common.enums.YesOrNo;
 import com.kx.common.exceptions.GraceException;
+import com.kx.common.exceptions.ServiceException;
 import com.kx.common.result.ResponseStatusEnum;
 import com.kx.common.utils.DateUtil;
 import com.kx.common.utils.DesensitizationUtil;
+import com.kx.service.base.UserContext;
 import com.kx.service.data.bo.RegistLoginBO;
 import com.kx.service.data.bo.UpdatedUserBO;
 import com.kx.service.data.pojo.Users;
 import com.kx.service.mapper.UsersMapper;
 import com.kx.service.service.UserService;
+import com.kx.service.util.token.AuthUser;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +45,7 @@ public class UserServiceImpl implements UserService {
     public Users queryByUnionId(String unionId) {
         Example userExample = new Example(Users.class);
         Example.Criteria criteria = userExample.createCriteria();
-        criteria.andEqualTo("union_id", unionId);
+        criteria.andEqualTo("openId", unionId);
         Users user = usersMapper.selectOneByExample(userExample);
         return user;
     }
@@ -83,7 +87,8 @@ public class UserServiceImpl implements UserService {
         user.setMobile(registLoginBO.getMobile());
         user.setNickname(registLoginBO.getNickname());//脱敏工具脱敏
         user.setFace(registLoginBO.getFace());
-        user.setUionId(registLoginBO.getUionId());
+        user.setUnionId(registLoginBO.getUnionId());
+        user.setOpenId(registLoginBO.getOpenId());
 
         user.setBirthday(DateUtil.stringToDate("1900-01-01"));
         user.setSex(Sex.secret.type);
@@ -154,5 +159,17 @@ public class UserServiceImpl implements UserService {
         }
 
         return updateUserInfo(updatedUserBO);
+    }
+
+    @Override
+    public Users getUserInfo() {
+        AuthUser tokenUser = UserContext.getCurrentUser();
+        if (tokenUser != null) {
+            Example userExample = new Example(Users.class);
+            Example.Criteria criteria = userExample.createCriteria();
+            criteria.andEqualTo("openId", tokenUser.getOpenId());
+            return usersMapper.selectOneByExample(userExample);
+        }
+        throw new ServiceException(ResultCode.USER_NOT_LOGIN);
     }
 }

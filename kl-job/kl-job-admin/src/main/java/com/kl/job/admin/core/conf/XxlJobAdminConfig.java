@@ -1,5 +1,6 @@
 package com.kl.job.admin.core.conf;
 
+import com.kl.job.admin.core.alarm.JobAlarmer;
 import com.kl.job.admin.core.scheduler.XxlJobScheduler;
 import com.kl.job.admin.dao.*;
 import org.springframework.beans.factory.DisposableBean;

@@ -74,14 +74,14 @@ public class UserInfoController extends BaseInfoProperties {
         return GraceJSONResult.ok(usersVO);
     }
 
-    @PostMapping("modifyUserInfo")
+    @PostMapping("/modifyUserInfo")
     public GraceJSONResult modifyUserInfo(@RequestBody UpdatedUserBO updatedUserBO) throws Exception {
         Users newUserInfo = userService.updateUserInfo(updatedUserBO);
         return GraceJSONResult.ok(newUserInfo);
     }
 
     @ApiOperation(value = "修改用户头像/背景图")//接口名
-    @PostMapping("modifyImage")
+    @PostMapping("/modifyImage")
     public GraceJSONResult modifyImage(@RequestParam Long userId,
                                        @RequestParam Integer type,
                                        MultipartFile file) throws Exception {
@@ -114,4 +114,11 @@ public class UserInfoController extends BaseInfoProperties {
 
         return GraceJSONResult.ok(users);
     }
+
+    @ApiOperation(value = "获取当前登录用户接口")
+    @GetMapping("getUserInfo")
+    public GraceJSONResult getUserInfo() {
+        return GraceJSONResult.ok(userService.getUserInfo());
+    }
+
 }
