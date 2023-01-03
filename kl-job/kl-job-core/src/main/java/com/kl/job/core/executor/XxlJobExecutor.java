@@ -116,14 +116,14 @@ public class XxlJobExecutor {
         return adminBizList;
     }
 
-    private static ConcurrentMap<String, IJobHandler> jobHandlerConcurrentMap = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, IJobHandler> jobHandlerRepository = new ConcurrentHashMap<>();
     public static IJobHandler loadJobHandler(String name) {
-        return jobHandlerConcurrentMap.get(name);
+        return jobHandlerRepository.get(name);
     }
-    private IJobHandler newRegistJobHandler(String name, MethodJobHandler methodJobHandler) {
-        return jobHandlerConcurrentMap.get(name);
+    public static IJobHandler registJobHandler(String name, IJobHandler jobHandler){
+        logger.info(">>>>>>>>>>> xxl-job register jobhandler success, name:{}, jobHandler:{}", name, jobHandler);
+        return jobHandlerRepository.put(name, jobHandler);
     }
-
     public void registJobHandler(XxlJob xxlJob, Object bean, Method executeMethod) {
         if (xxlJob == null) {
             return;
@@ -157,16 +157,38 @@ public class XxlJobExecutor {
                 throw new RuntimeException("xxl-job method-jobhandler destroyMethod invalid, for[" + clazz + "#" + methodName + "] .");
             }
         }
-        newRegistJobHandler(name, new MethodJobHandler(bean, executeMethod, initMethod, destroyMethod));
+
+        // registry jobhandler
+        registJobHandler(name, new MethodJobHandler(bean, executeMethod, initMethod, destroyMethod));
     }
 
+    private static ConcurrentMap<Integer, JobThread> jobThreadRepository = new ConcurrentHashMap<Integer, JobThread>();
+    public static JobThread registJobThread(int jobId, IJobHandler handler, String removeOldReason){
+        JobThread newJobThread = new JobThread(jobId, handler);
+        newJobThread.start();
+        logger.info(">>>>>>>>>>> xxl-job regist JobThread success, jobId:{}, handler:{}", new Object[]{jobId, handler});
 
+        JobThread oldJobThread = jobThreadRepository.put(jobId, newJobThread);	// putIfAbsent | oh my god, map's put method return the old value!!!
+        if (oldJobThread != null) {
+            oldJobThread.toStop(removeOldReason);
+            oldJobThread.interrupt();
+        }
 
+        return newJobThread;
+    }
 
-    public static JobThread removeJobThread(int jobId, String removeOldReason) {
-        // TODO: 2022-12-07  removeJobThread
+    public static JobThread removeJobThread(int jobId, String removeOldReason){
+        JobThread oldJobThread = jobThreadRepository.remove(jobId);
+        if (oldJobThread != null) {
+            oldJobThread.toStop(removeOldReason);
+            oldJobThread.interrupt();
+
+            return oldJobThread;
+        }
         return null;
     }
 
-
+    public static JobThread loadJobThread(int jobId){
+        return jobThreadRepository.get(jobId);
+    }
 }

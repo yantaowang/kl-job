@@ -35,7 +35,7 @@ public class ExecutorRegistryThread {
                     try {
                         RegistryParam registryParam = new RegistryParam(RegistryConfig.RegistType.EXECUTOR.name(), appname, address);
                         for (AdminBiz adminBiz : XxlJobExecutor.getAdminBizList()) {
-                            ReturnT<String> register = adminBiz.register(registryParam);
+                            ReturnT<String> register = adminBiz.registry(registryParam);
                             if (register != null && ReturnT.SUCCESS_CODE == register.getCode()) {
                                 register = ReturnT.SUCCESS;
                                 logger.debug(">>>>>>>>>>> xxl-job registry success, registryParam:{}, registryResult:{}", new Object[]{registryParam, register});
@@ -65,7 +65,7 @@ public class ExecutorRegistryThread {
                     RegistryParam registryParam = new RegistryParam(RegistryConfig.RegistType.EXECUTOR.name(), appname, address);
                     for (AdminBiz adminBiz : XxlJobExecutor.getAdminBizList()) {
                         try {
-                            ReturnT<String> registryResult = adminBiz.registerRemove(registryParam);
+                            ReturnT<String> registryResult = adminBiz.registryRemove(registryParam);
                             if (registryResult != null && ReturnT.SUCCESS_CODE == registryResult.getCode()) {
                                 registryResult = ReturnT.SUCCESS;
                                 logger.info(">>>>>>>>>>> xxl-job registry-remove success, registryParam:{}, registryResult:{}", new Object[]{registryParam, registryResult});

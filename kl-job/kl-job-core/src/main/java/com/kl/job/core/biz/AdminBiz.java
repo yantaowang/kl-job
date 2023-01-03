@@ -8,9 +8,33 @@ import java.util.List;
 
 public interface AdminBiz {
 
-    ReturnT<String> callbcak(List<HandleCallbackParam> callbackParamList);
+    // ---------------------- callback ----------------------
 
-    ReturnT<String> register(RegistryParam registryParam);
+    /**
+     * callback
+     *
+     * @param callbackParamList
+     * @return
+     */
+    public ReturnT<String> callback(List<HandleCallbackParam> callbackParamList);
 
-    ReturnT<String> registerRemove(RegistryParam registryParam);
+
+    // ---------------------- registry ----------------------
+
+    /**
+     * registry
+     *
+     * @param registryParam
+     * @return
+     */
+    public ReturnT<String> registry(RegistryParam registryParam);
+
+    /**
+     * registry remove
+     *
+     * @param registryParam
+     * @return
+     */
+    public ReturnT<String> registryRemove(RegistryParam registryParam);
+
 }

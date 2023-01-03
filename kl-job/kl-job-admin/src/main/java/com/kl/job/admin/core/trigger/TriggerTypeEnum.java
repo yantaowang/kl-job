@@ -1,6 +1,7 @@
 package com.kl.job.admin.core.trigger;
 
-import com.xxl.job.admin.core.util.I18nUtil;
+
+import com.kl.job.admin.core.util.I18nUtil;
 
 /**
  * trigger type enum
