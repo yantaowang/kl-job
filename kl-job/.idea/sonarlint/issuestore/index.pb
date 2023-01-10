@@ -31,8 +31,6 @@ u
 Ekl-job-core/src/main/java/com/kl/job/core/log/XxlJobFileAppender.java,8\9\89586bdf91cf15a39cf6051dba8fdb5be5f690cd
 j
 :kl-job-core/src/main/java/com/kl/job/core/util/IpUtil.java,3\d\3d8c71ac217ad25504bbcc2989956c1bdb896ff5
-Ü
-Vkl-job-admin/src/main/java/com/kl/job/admin/controller/annotation/PermissionLimit.java,3\0\30bbe869ecff4aa2cb1604c207a873114951c4bb
 ç
 ]kl-job-admin/src/main/java/com/kl/job/admin/controller/interceptor/PermissionInterceptor.java,f\4\f4ebe001d55e8dc8855578fb28c5df78d6078693
 u

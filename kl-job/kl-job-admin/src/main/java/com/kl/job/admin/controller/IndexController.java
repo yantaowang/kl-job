@@ -1,5 +1,6 @@
 package com.kl.job.admin.controller;
 
+import com.kl.job.admin.service.XxlJobService;
 import com.xxl.job.admin.controller.annotation.PermissionLimit;
 import com.xxl.job.admin.service.LoginService;
 import com.xxl.job.admin.service.XxlJobService;

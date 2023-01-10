@@ -1,5 +1,6 @@
 package com.kl.job.admin.service.impl;
 
+import com.kl.job.admin.core.thread.JobCompleteHelper;
 import com.kl.job.admin.core.thread.JobRegistryHelper;
 import com.kl.job.core.biz.AdminBiz;
 import com.kl.job.core.biz.model.HandleCallbackParam;

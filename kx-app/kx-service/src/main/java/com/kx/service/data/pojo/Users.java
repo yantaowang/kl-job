@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Data
 public class Users {
@@ -100,4 +101,8 @@ public class Users {
      */
     @Column(name = "updated_time")
     private Date updatedTime;
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+    }
 }
