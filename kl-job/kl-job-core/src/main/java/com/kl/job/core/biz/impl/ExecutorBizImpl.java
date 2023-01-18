@@ -20,7 +20,16 @@ public class ExecutorBizImpl implements ExecutorBiz {
 
     @Override
     public ReturnT<String> idleBeat(IdleBeatParam idleBeatParam) {
-        return null;
+        boolean isRunningQrHasQueue = false;
+        JobThread jobThread = XxlJobExecutor.loadJobThread(idleBeatParam.getJobId());
+        if(jobThread != null && jobThread.isRunningOrHasQueue()) {
+            isRunningQrHasQueue = true;
+        }
+
+        if(isRunningQrHasQueue) {
+            return new ReturnT<>(ReturnT.FAIL_CODE, "job thread is running or has trigger queue.");
+        }
+        return ReturnT.SUCCESS;
     }
 
     @Override

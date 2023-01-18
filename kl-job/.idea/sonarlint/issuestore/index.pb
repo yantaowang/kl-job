@@ -59,5 +59,3 @@ Jkl-job-admin/src/main/java/com/kl/job/admin/controller/UserController.java,4\0
 Nkl-job-admin/src/main/java/com/kl/job/admin/controller/JobGroupController.java,5\9\59adcb2914bc256184d2987e474c68151508f373
 €
 Pkl-job-admin/src/main/java/com/kl/job/admin/core/scheduler/ScheduleTypeEnum.java,8\d\8db3e93776cba89e719d40326226f896e0d173dc
-s
-Ckl-job-core/src/main/java/com/kl/job/core/enums/RegistryConfig.java,3\d\3d9e913cc1f10f820bd5c4caac5972e9fb6fadfb
