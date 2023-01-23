@@ -1,0 +1,33 @@
+
+h
+java:S3776]"RRefactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.(“–ış
+@
+java:S1181b"%Catch Exception instead of Throwable.(‡˜ÚÚøÿÿÿÿ
+A
+java:S1181¼"%Catch Exception instead of Throwable.(‡˜ÚÚøÿÿÿÿ
+z
+java:S2142¼"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(‡˜ÚÚøÿÿÿÿ
+K
+java:S1481•"/Remove this unused "tempResult" local variable.(òÑØ¸úÿÿÿÿ
+E
+java:S2093l"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+A
+java:S1181ò"%Catch Exception instead of Throwable.(‡˜ÚÚøÿÿÿÿ
+L
+java:S1128"6Remove this unused import 'java.awt.font.TextHitInfo'.(§×Ï
+t
+java:S2293)"YReplace the type specification in this constructor call with the diamond operator ("<>").(¿½Õ£ùÿÿÿÿ
+t
+java:S2293="YReplace the type specification in this constructor call with the diamond operator ("<>").(”ôş¸üÿÿÿÿ
+p
+java:S2293‡"YReplace the type specification in this constructor call with the diamond operator ("<>").(µîáê
+K
+java:S1066·"/Merge this if statement with the enclosing one.(â‹¨îüÿÿÿÿ
+Q
+java:S1141†"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Y
+java:S1155Y">Use isEmpty() to check whether the collection is empty or not.(ÍÎì°ûÿÿÿÿ
+Z
+java:S1155·">Use isEmpty() to check whether the collection is empty or not.(â‹¨îüÿÿÿÿ
+U
+java:S1155â">Use isEmpty() to check whether the collection is empty or not.(ÃÓµİ

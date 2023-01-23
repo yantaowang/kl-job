@@ -1,0 +1,21 @@
+
+`	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(ÒºÜ¡øÿÿÿÿ
+`	java:S112e"FDefine and throw a dedicated exception instead of using a generic one.(ÆÎôôûÿÿÿÿ
+t
+java:S2142L"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+[
+java:S1193M"@Replace the usage of the "instanceof" operator by a catch block.(“ë¬¨ûÿÿÿÿ
+‡
+java:S1130e"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(ÆÎôôûÿÿÿÿ
+M
+java:S1874"1Remove this use of "getMethod"; it is deprecated.(“•ššüÿÿÿÿ
+C
+java:S1604*"(Make this anonymous inner class a lambda(ÛÀõ“ýÿÿÿÿ
+>
+java:S16040"(Make this anonymous inner class a lambda(Ò‘›•
+>
+java:S1604""(Make this anonymous inner class a lambda(¼­¤¯
+?
+java:S1604…"(Make this anonymous inner class a lambda(¼Ò‹°
+\
+java:S2184A"FCast one of the operands of this multiplication operation to a "long".(½¨òô

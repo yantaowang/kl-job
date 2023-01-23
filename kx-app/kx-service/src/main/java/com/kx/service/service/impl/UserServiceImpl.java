@@ -163,13 +163,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users getUserInfo() {
-        AuthUser tokenUser = UserContext.getCurrentUser();
-        if (tokenUser != null) {
-            Example userExample = new Example(Users.class);
-            Example.Criteria criteria = userExample.createCriteria();
-            criteria.andEqualTo("openId", tokenUser.getOpenId());
-            return usersMapper.selectOneByExample(userExample);
-        }
-        throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+//        AuthUser tokenUser = UserContext.getCurrentUser();
+//        if (tokenUser != null) {
+//            Example userExample = new Example(Users.class);
+//            Example.Criteria criteria = userExample.createCriteria();
+//            criteria.andEqualTo("openId", tokenUser.getOpenId());
+//            return usersMapper.selectOneByExample(userExample);
+//        }
+//        throw new ServiceException(ResultCode.USER_NOT_LOGIN);
+
+        Example userExample = new Example(Users.class);
+        Example.Criteria criteria = userExample.createCriteria();
+        criteria.andEqualTo("id", 1);
+        return usersMapper.selectOneByExample(userExample);
     }
 }

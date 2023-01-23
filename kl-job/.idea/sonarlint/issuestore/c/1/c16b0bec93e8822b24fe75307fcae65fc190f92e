@@ -1,0 +1,15 @@
+
+m
+java:S3776$"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(µ£ƒòüÿÿÿÿ
+P	java:S125A"<This block of commented-out lines of code should be removed.(Û¤‹o
+P	java:S125X"<This block of commented-out lines of code should be removed.(Û¤‹o
+@
+java:S1068"*Remove this unused "logger" private field.(§­¨ß
+o
+java:S2293;"YReplace the type specification in this constructor call with the diamond operator ("<>").(»±œà
+t
+java:S2293g"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÚÝ´½ùÿÿÿÿ
+t
+java:S2293p"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÒÆãÖøÿÿÿÿ
+~
+java:S1488„"bImmediately return this expression instead of assigning it to the temporary variable "pushResult".(ëøµ¼þÿÿÿÿ

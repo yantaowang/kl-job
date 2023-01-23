@@ -1,0 +1,35 @@
+
+[	java:S112E"FDefine and throw a dedicated exception instead of using a generic one.(Â¶Ä“
+a	java:S112‡"FDefine and throw a dedicated exception instead of using a generic one.(ˆ¼Î«øÿÿÿÿ
+a	java:S112‹"FDefine and throw a dedicated exception instead of using a generic one.(µïÜÿÿÿÿÿ
+a	java:S112–"FDefine and throw a dedicated exception instead of using a generic one.(ÆÃ±‘ÿÿÿÿÿ
+a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ƒ²Á±úÿÿÿÿ
+u
+java:S1450Q"ZRemove the "embedServer" field and declare it as a local variable in the relevant methods.(–É÷ûıÿÿÿÿ
+‚
+java:S1130E"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(Â¶Ä“
+M
+java:S1135L"2Complete the task associated to this TODO comment.(¡ÔÉøÿÿÿÿ
+J
+java:S1874\"/Remove this use of "isEmpty"; it is deprecated.(¢â¤Êùÿÿÿÿ
+E
+java:S1874f"/Remove this use of "isEmpty"; it is deprecated.( šûô
+Q
+java:S1117g";Rename "address" which hides the field declared at line 31.(½üßì
+E
+java:S1874h"/Remove this use of "isEmpty"; it is deprecated.(÷úÎ‘
+K
+java:S2696k"6Make the enclosing method "static" or remove this set.(¬÷Û
+H
+java:S3011",This accessibility update should be removed.(©ßçÂıÿÿÿÿ
+C
+java:S3011”",This accessibility update should be removed.(ªğ¨ì
+T
+java:S3878©"8Remove this array creation and simply pass the elements.(Ğ¯Ûëûÿÿÿÿ
+G
+java:S1128"2Remove this unused import 'sun.awt.EmbeddedFrame'.(ŞÃ»N
+p
+java:S2293¥"YReplace the type specification in this constructor call with the diamond operator ("<>").(…¯ƒ
+k	java:S117X"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÿºäÿÿÿÿÿ
+J
+java:S1191"5Use classes from the Java API instead of Sun classes.(ŞÃ»N

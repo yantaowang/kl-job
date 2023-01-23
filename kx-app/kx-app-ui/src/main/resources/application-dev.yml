@@ -50,8 +50,8 @@ management:
 
 # MinIO 配置
 minio:
-  endpoint: http://47.93.244.107:9000      # MinIO服务地址 这里的端口不是自己配置的端口?
-  fileHost: http://47.93.244.107:9000      # 文件地址host 这里的端口不是自己配置的端口?
+  endpoint: http://192.168.31.13:9000      # MinIO服务地址 这里的端口不是自己配置的端口?
+  fileHost: http://192.168.31.13:9000      # 文件地址host 这里的端口不是自己配置的端口?
   bucketName: kxw                      # 存储桶bucket名称
   accessKey: admin                         # 用户名
   secretKey: admin123456                     # 密码

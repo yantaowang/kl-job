@@ -22,6 +22,11 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="erwan-test" />
+      <option name="name" value="erwan-test" />
+      <option name="url" value="http://testnexus.qn76.cn/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="maven-repository" />
       <option name="name" value="maven-repository" />
       <option name="url" value="http://testnexus.qn76.cn/nexus/content/groups/public" />

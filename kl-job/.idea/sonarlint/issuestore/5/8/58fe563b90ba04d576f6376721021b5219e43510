@@ -1,0 +1,52 @@
+
+g
+java:S37760"RRefactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.(ú¡­,
+S
+java:S1854F">Remove this useless assignment to local variable "drainToNum".(¶™¡*
+S
+java:S1854X">Remove this useless assignment to local variable "drainToNum".(¶™¡*
+t
+java:S2142N"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾
+D
+java:S1481F"/Remove this unused "drainToNum" local variable.(¶™¡*
+D
+java:S1481X"/Remove this unused "drainToNum" local variable.(¶™¡*
+t
+java:S2142y"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+u
+java:S2142"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+u
+java:S2142—"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+V	java:S899ë";Do something with the "boolean" value returned by "delete".(›¾¾ñúÿÿÿÿ
+j
+java:S4042ë"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(›¾¾ñúÿÿÿÿ
+Q	java:S899÷";Do something with the "boolean" value returned by "delete".(ÂÌÛ
+e
+java:S4042÷"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(ÂÌÛ
+Q	java:S899ı";Do something with the "boolean" value returned by "delete".(ÂÌÛ
+e
+java:S4042ı"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(ÂÌÛ
+Z
+java:S1128"ERemove this unused import 'org.springframework.util.CollectionUtils'.(åå…K
+`
+java:S1128"ERemove this unused import 'java.util.concurrent.LinkedBlockingDeque'.(ÌÇœüÿÿÿÿ
+o
+java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(›«ü‰
+o
+java:S2293E"YReplace the type specification in this constructor call with the diamond operator ("<>").(Æ °Ó
+o
+java:S2293W"YReplace the type specification in this constructor call with the diamond operator ("<>").(Æ °Ó
+g	java:S117Õ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ‘Ü‰
+g	java:S117ó"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ãú’¿
+>
+java:S16049"(Make this anonymous inner class a lambda(‚ƒ“ó
+C
+java:S1604k"(Make this anonymous inner class a lambda(–³ÀÊıÿÿÿÿ
+Y
+java:S1155J">Use isEmpty() to check whether the collection is empty or not.(âğ²ûÿÿÿÿ
+Y
+java:S1155Y">Use isEmpty() to check whether the collection is empty or not.(âğ²ûÿÿÿÿ
+Z
+java:S1155Ğ">Use isEmpty() to check whether the collection is empty or not.(è¢ùŸøÿÿÿÿ
+:
+java:S1700-"$Rename field "triggerCallbackThread"(‚ıÍ„

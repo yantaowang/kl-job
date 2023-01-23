@@ -19,4 +19,5 @@ public class VlogBO {
     private Integer height;
     private Integer likeCounts;
     private Integer commentsCounts;
+    private Integer contentType;
 }
